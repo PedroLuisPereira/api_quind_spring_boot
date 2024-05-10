@@ -156,7 +156,7 @@ class CuentaControllerTest {
     void consignar() throws Exception {
         // given - precondition or setup
         cuentaEntity = cuentaRepository.save(cuentaEntity);
-        OperacionDto operacionDto = new OperacionDto(null, "5312345678", 50000);
+        OperacionDto operacionDto = new OperacionDto(null, "5312345678", "50000");
 
         // when - action or behaviour that we are going test
         ResultActions response = mockMvc.perform(post("/api/cuentas/operacion/consignar")
@@ -187,7 +187,7 @@ class CuentaControllerTest {
                 new Date(),
                 cliente));
 
-        OperacionDto operacionDto = new OperacionDto("5312345678", "53223456789", 50000);
+        OperacionDto operacionDto = new OperacionDto("5312345678", "53223456789", "50000");
 
         // when - action or behaviour that we are going test
         ResultActions response = mockMvc.perform(post("/api/cuentas/operacion/transferir")
@@ -205,7 +205,7 @@ class CuentaControllerTest {
     void retirar() throws Exception {
         // given - precondition or setup
         cuentaEntity = cuentaRepository.save(cuentaEntity);
-        OperacionDto operacionDto = new OperacionDto("5312345678", null, 40000);
+        OperacionDto operacionDto = new OperacionDto("5312345678", null, "40000");
 
         // when - action or behaviour that we are going test
         ResultActions response = mockMvc.perform(post("/api/cuentas/operacion/retirar")

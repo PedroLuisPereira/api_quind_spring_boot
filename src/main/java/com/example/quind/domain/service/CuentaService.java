@@ -124,6 +124,12 @@ public class CuentaService {
 
     public Cuenta consignacion(OperacionSolicitud operacionSolicitud) {
 
+        Validacion.validarObligatorio(operacionSolicitud.getNumeroCuentaDestino(),"El campo numeroCuentaDestino es requerido");
+        Validacion.validarObligatorio(operacionSolicitud.getValor(), "El campo valor es requerido");
+        Validacion.validarValorNumericoDouble(operacionSolicitud.getValor(), "El campo valor debe ser numérico");
+
+        double valor = Double.parseDouble(operacionSolicitud.getValor());
+
         Cuenta cuentaActual = cuentaRepository.listarByNumeroCuenta(operacionSolicitud.getNumeroCuentaDestino())
                 .stream()
                 .findFirst()
@@ -134,7 +140,7 @@ public class CuentaService {
                 cuentaActual.getTipoDeCuenta(),
                 cuentaActual.getNumeroDeCuenta(),
                 cuentaActual.getEstado(),
-                cuentaActual.getSaldo() + operacionSolicitud.getValor(),
+                cuentaActual.getSaldo() + valor,
                 cuentaActual.getExentaGMF(),
                 cuentaActual.getFechaDeCreacion(),
                 new Date(),
@@ -146,7 +152,15 @@ public class CuentaService {
 
     public Cuenta transferencia(OperacionSolicitud operacionSolicitud) {
 
-        Cuenta cuentaOrigen = cuentaRepository.listarByNumeroCuenta(operacionSolicitud.getNumeroCuentaOrigen()).stream()
+        Validacion.validarObligatorio(operacionSolicitud.getNumeroCuentaOrigen(),"El campo numeroCuentaOrigen es requerido");
+        Validacion.validarObligatorio(operacionSolicitud.getNumeroCuentaDestino(),"El campo numeroCuentaDestino es requerido");
+        Validacion.validarObligatorio(operacionSolicitud.getValor(), "El campo valor es requerido");
+        Validacion.validarValorNumericoDouble(operacionSolicitud.getValor(), "El campo valor debe ser numérico");
+
+        double valor = Double.parseDouble(operacionSolicitud.getValor());
+
+        Cuenta cuentaOrigen = cuentaRepository.listarByNumeroCuenta(operacionSolicitud.getNumeroCuentaOrigen())
+                .stream()
                 .findFirst()
                 .orElseThrow(() -> new RegistroNotFoundException("Cuenta origen no encontrada"));
 
@@ -154,7 +168,7 @@ public class CuentaService {
                 .stream().findFirst()
                 .orElseThrow(() -> new RegistroNotFoundException("Cuenta destino no encontrada"));
 
-        if (cuentaOrigen.getSaldo() < operacionSolicitud.getValor()
+        if (cuentaOrigen.getSaldo() < valor
                 && !cuentaOrigen.getTipoDeCuenta().equals(CUENTA_CORRIENTE)) {
             throw new CampoConException("No se puede realizar operacion saldo insuficiente");
         }
@@ -164,7 +178,7 @@ public class CuentaService {
                 cuentaOrigen.getTipoDeCuenta(),
                 cuentaOrigen.getNumeroDeCuenta(),
                 cuentaOrigen.getEstado(),
-                cuentaOrigen.getSaldo() - operacionSolicitud.getValor(),
+                cuentaOrigen.getSaldo() - valor,
                 cuentaOrigen.getExentaGMF(),
                 cuentaOrigen.getFechaDeCreacion(),
                 new Date(),
@@ -175,7 +189,7 @@ public class CuentaService {
                 cuentaDestino.getTipoDeCuenta(),
                 cuentaDestino.getNumeroDeCuenta(),
                 cuentaDestino.getEstado(),
-                cuentaDestino.getSaldo() + operacionSolicitud.getValor(),
+                cuentaDestino.getSaldo() + valor,
                 cuentaDestino.getExentaGMF(),
                 cuentaDestino.getFechaDeCreacion(),
                 new Date(),
@@ -188,11 +202,17 @@ public class CuentaService {
 
     public Cuenta retiro(OperacionSolicitud operacionSolicitud) {
 
+        Validacion.validarObligatorio(operacionSolicitud.getNumeroCuentaOrigen(),"El campo numeroCuentaOrigen es requerido");
+        Validacion.validarObligatorio(operacionSolicitud.getValor(), "El campo valor es requerido");
+        Validacion.validarValorNumericoDouble(operacionSolicitud.getValor(), "El campo valor debe ser numérico");
+
+        double valor = Double.parseDouble(operacionSolicitud.getValor());
+
         Cuenta cuentaOrigen = cuentaRepository.listarByNumeroCuenta(operacionSolicitud.getNumeroCuentaOrigen()).stream()
                 .findFirst()
                 .orElseThrow(() -> new RegistroNotFoundException("Cuenta origen no encontrada"));
 
-        if (cuentaOrigen.getSaldo() < operacionSolicitud.getValor()
+        if (cuentaOrigen.getSaldo() < valor
                 && !cuentaOrigen.getTipoDeCuenta().equals(CUENTA_CORRIENTE)) {
             throw new CampoConException("No se puede realizar operacion saldo insuficiente");
         }
@@ -202,7 +222,7 @@ public class CuentaService {
                 cuentaOrigen.getTipoDeCuenta(),
                 cuentaOrigen.getNumeroDeCuenta(),
                 cuentaOrigen.getEstado(),
-                cuentaOrigen.getSaldo() - operacionSolicitud.getValor(),
+                cuentaOrigen.getSaldo() - valor,
                 cuentaOrigen.getExentaGMF(),
                 cuentaOrigen.getFechaDeCreacion(),
                 new Date(),

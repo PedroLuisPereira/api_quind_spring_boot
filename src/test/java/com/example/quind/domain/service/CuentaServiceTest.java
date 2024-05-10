@@ -265,7 +265,7 @@ class CuentaServiceTest {
         Mockito.when(cuentaRepository.guardar(any())).thenReturn(cuenta2);
 
         // when - action or the behaviour that we are going test
-        Cuenta cuentaUpdate = cuentaService.consignacion(new OperacionSolicitud(null, "123456789", 50000));
+        Cuenta cuentaUpdate = cuentaService.consignacion(new OperacionSolicitud(null, "123456789", "50000"));
 
         // then - verify the output
         Assertions.assertNotNull(cuentaUpdate);
@@ -278,7 +278,7 @@ class CuentaServiceTest {
     void consignacionCuentaNoExiste() {
 
         // given
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud(null, "5312345678", 50000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud(null, "5312345678", "50000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta(anyString())).thenReturn(new ArrayList<>());
 
         // when
@@ -327,7 +327,7 @@ class CuentaServiceTest {
         Mockito.when(cuentaRepository.guardar(any())).thenReturn(cuentaOrigenUpdate);
 
         // when - action or the behaviour that we are going test
-        Cuenta cuentaUpdate = cuentaService.transferencia(new OperacionSolicitud("5312345678", "5387654321", 50000));
+        Cuenta cuentaUpdate = cuentaService.transferencia(new OperacionSolicitud("5312345678", "5387654321", "50000"));
 
         // then - verify the output
         Assertions.assertNotNull(cuentaUpdate);
@@ -340,7 +340,7 @@ class CuentaServiceTest {
     void transferenciaCuentaOrigenNoexiste() {
 
         // given
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5322345678", 50000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5322345678", "50000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5312345678")).thenReturn(new ArrayList<>());
         
 
@@ -356,7 +356,7 @@ class CuentaServiceTest {
     void transferenciaCuentaDestinoNoexiste() {
 
         // given
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5345678963", 50000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5345678963", "50000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5312345678")).thenReturn(List.of(cuenta));
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5345678963")).thenReturn(new ArrayList<>());
         
@@ -383,7 +383,7 @@ class CuentaServiceTest {
                 new Date(),
                 cliente);
 
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5387654321", 60000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", "5387654321", "60000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5312345678")).thenReturn(List.of(cuenta));
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5387654321")).thenReturn(List.of(cuentaDestino));
         
@@ -412,7 +412,7 @@ class CuentaServiceTest {
         Mockito.when(cuentaRepository.guardar(any())).thenReturn(cuentaOrigenUpdate);
 
         // when - action or the behaviour that we are going test
-        Cuenta cuentaUpdate = cuentaService.retiro(new OperacionSolicitud("5312345678", null, 50000));
+        Cuenta cuentaUpdate = cuentaService.retiro(new OperacionSolicitud("5312345678", null, "50000"));
 
         // then - verify the output
         Assertions.assertNotNull(cuentaUpdate);
@@ -425,7 +425,7 @@ class CuentaServiceTest {
     void retiroCuentaNoExiste() {
 
         // given
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", null, 60000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", null, "60000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5312345678")).thenReturn(new ArrayList<>());
         
 
@@ -441,7 +441,7 @@ class CuentaServiceTest {
     void retiroSaldoInsuficiente() {
 
         // given
-        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", null, 60000);
+        OperacionSolicitud operacionSolicitud = new OperacionSolicitud("5312345678", null, "60000");
         Mockito.when(cuentaRepository.listarByNumeroCuenta("5312345678")).thenReturn(List.of(cuenta));
         
 

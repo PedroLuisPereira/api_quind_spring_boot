@@ -5,9 +5,9 @@ public class OperacionSolicitud {
 
     private final String numeroCuentaOrigen;
     private final String numeroCuentaDestino;
-    private final double valor;
+    private final String valor;
 
-    public OperacionSolicitud(String numeroCuentaOrigen, String numeroCuentaDestino, double valor) {
+    public OperacionSolicitud(String numeroCuentaOrigen, String numeroCuentaDestino, String valor) {
         this.numeroCuentaOrigen = numeroCuentaOrigen;
         this.numeroCuentaDestino = numeroCuentaDestino;
         this.valor = valor;
@@ -21,7 +21,7 @@ public class OperacionSolicitud {
         return numeroCuentaDestino;
     }
 
-    public double getValor() {
+    public String getValor() {
         return valor;
     }
 

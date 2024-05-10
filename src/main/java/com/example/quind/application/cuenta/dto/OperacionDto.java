@@ -12,7 +12,7 @@ public class OperacionDto {
 
     private String numeroCuentaOrigen;
     private String numeroCuentaDestino;
-    private double valor;
+    private String valor;
 
 }
 
