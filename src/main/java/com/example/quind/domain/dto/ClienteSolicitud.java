@@ -5,7 +5,7 @@ public class ClienteSolicitud {
 
     private Long id;
     private String tipoDeIdentificacion;
-    private String numeroDeIdentificacion;
+    private final String numeroDeIdentificacion;
     private String nombres;
     private String apellidos;
     private String correoElectronico;
@@ -29,7 +29,6 @@ public class ClienteSolicitud {
     public String getTipoDeIdentificacion() {
         return tipoDeIdentificacion;
     }
-
 
     public String getNumeroDeIdentificacion() {
         return numeroDeIdentificacion;

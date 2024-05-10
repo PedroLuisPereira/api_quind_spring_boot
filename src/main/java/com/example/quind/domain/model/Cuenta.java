@@ -6,15 +6,15 @@ import java.util.Date;
 
 public class Cuenta implements Serializable {
 
-    private Long id;
-    private String tipoDeCuenta;
-    private String numeroDeCuenta;
-    private String estado;
-    private double saldo;
-    private String exentaGMF;
-    private Date fechaDeCreacion;
-    private Date fechaDeModificacion;
-    private Cliente cliente;
+    private final Long id;
+    private final String tipoDeCuenta;
+    private final String numeroDeCuenta;
+    private final String estado;
+    private final double saldo;
+    private final String exentaGMF;
+    private final Date fechaDeCreacion;
+    private final Date fechaDeModificacion;
+    private final Cliente cliente;
 
     private Cuenta(Long id, String tipoDeCuenta, String numeroDeCuenta, String estado, double saldo, String exentaGMF, Date fechaDeCreacion, Date fechaDeModificacion, Cliente cliente) {
         this.id = id;

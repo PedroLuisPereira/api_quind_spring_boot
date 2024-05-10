@@ -5,15 +5,15 @@ import java.util.Date;
 
 public class Cliente implements Serializable {
 
-    private Long id;
-    private String tipoDeIdentificacion;
-    private String numeroDeIdentificacion;
-    private String nombres;
-    private String apellidos;
-    private String correoElectronico;
-    private Date fechaDeNacimiento;
-    private Date fechaDeCreacion;
-    private Date fechaDeModificacion;
+    private final Long id;
+    private final String tipoDeIdentificacion;
+    private final String numeroDeIdentificacion;
+    private final String nombres;
+    private final String apellidos;
+    private final String correoElectronico;
+    private final Date fechaDeNacimiento;
+    private final Date fechaDeCreacion;
+    private final Date fechaDeModificacion;
 
     private Cliente(long id,
             String tipoDeIdentificacion,
