@@ -42,8 +42,15 @@ public class CuentaService {
 
     public Cuenta crear(CuentaSolicitud cuentaSolicitud) {
 
-        Validacion.validarObligatorio(cuentaSolicitud.getExentaGMF(), "El campo exentaGMF es requerido");
         Validacion.validarObligatorio(cuentaSolicitud.getTipoDeCuenta(), "El campo tipoDeCuenta es requerido");
+        Validacion.validarObligatorio(cuentaSolicitud.getSaldo(), "El campo saldo es requerido");
+        Validacion.validarObligatorio(cuentaSolicitud.getExentaGMF(), "El campo exentaGMF es requerido");
+        Validacion.validarObligatorio(cuentaSolicitud.getClienteId(), "El campo clienteId es requerido");
+        Validacion.validarValorNumericoDouble(cuentaSolicitud.getSaldo(), "El campo saldo debe ser numérico");
+        Validacion.validarValorNumericoLong(cuentaSolicitud.getClienteId(), "El campo clienteId debe ser numérico");
+
+        double saldo = Double.parseDouble(cuentaSolicitud.getSaldo());
+        long clienteId = Long.parseLong(cuentaSolicitud.getClienteId());
 
         if (!cuentaSolicitud.getTipoDeCuenta().equals(CUENTA_AHORRO)
                 && !cuentaSolicitud.getTipoDeCuenta().equals(CUENTA_CORRIENTE)) {
@@ -57,7 +64,7 @@ public class CuentaService {
             numeroCuenta = "33" + numeroCuenta;
         }
 
-        if (cuentaSolicitud.getTipoDeCuenta().equals(CUENTA_AHORRO) && cuentaSolicitud.getSaldo() < 0) {
+        if (cuentaSolicitud.getTipoDeCuenta().equals(CUENTA_AHORRO) && saldo < 0) {
             throw new CampoConException("El saldo de CUENTA_AHORRO no puede ser menor a 0");
         }
 
@@ -65,7 +72,7 @@ public class CuentaService {
             throw new CampoConException("El campo exentaGMF debe ser SI o NO");
         }
 
-        Cliente cliente = clienteRepository.listarByid(cuentaSolicitud.getClienteId())
+        Cliente cliente = clienteRepository.listarByid(clienteId)
                 .orElseThrow(() -> new RegistroNotFoundException("Cliente no encontrado"));
 
         Cuenta cuenta = Cuenta.getInstance(
@@ -73,7 +80,7 @@ public class CuentaService {
                 cuentaSolicitud.getTipoDeCuenta(),
                 numeroCuenta,
                 ACTIVA,
-                cuentaSolicitud.getSaldo(),
+                saldo,
                 cuentaSolicitud.getExentaGMF(),
                 new Date(),
                 new Date(),

@@ -120,7 +120,7 @@ class CuentaControllerTest {
     @Test
     void create() throws Exception {
         // given - precondition or setup
-        CuentaDto cuentaDto = new CuentaDto(CUENTA_AHORRO, 100000, "SI", cliente.getId());
+        CuentaDto cuentaDto = new CuentaDto(CUENTA_AHORRO, "100000", "SI", cliente.getId().toString());
 
         // when - action or behaviour that we are going test
         ResultActions response = mockMvc.perform(post("/api/cuentas")
@@ -130,7 +130,7 @@ class CuentaControllerTest {
         // then - verify the result or output using assert statements
         response.andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.saldo", is(cuentaDto.getSaldo())))
+                .andExpect(jsonPath("$.saldo", is(Double.parseDouble(cuentaDto.getSaldo()))))
                 .andExpect(jsonPath("$.tipoDeCuenta", is(cuentaDto.getTipoDeCuenta())));
     }
 

@@ -76,7 +76,7 @@ class CuentaServiceTest {
                 new Date(),
                 new Date(), cliente);
 
-        cuentaSolicitud = new CuentaSolicitud(CUENTA_AHORRO, 50000, "SI", 1L);
+        cuentaSolicitud = new CuentaSolicitud(CUENTA_AHORRO, "50000", "SI", "1");
     }
 
     @Test
@@ -140,7 +140,7 @@ class CuentaServiceTest {
     void crearSaldoNegativoAhorro() {
 
         // given
-        cuentaSolicitud.setSaldo(-50000);
+        cuentaSolicitud.setSaldo("-50000");
 
         // when
         CampoConException thrown = Assertions.assertThrows(CampoConException.class,
@@ -168,7 +168,7 @@ class CuentaServiceTest {
     void crearClienteNoExiste() {
 
         // given
-        cuentaSolicitud.setClienteId(5L);
+        cuentaSolicitud.setClienteId("5");
         Mockito.when(clienteRepository.listarByid(anyLong())).thenReturn(Optional.empty());
 
         // when

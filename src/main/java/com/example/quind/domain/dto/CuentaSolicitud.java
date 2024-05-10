@@ -4,11 +4,11 @@ package com.example.quind.domain.dto;
 public class CuentaSolicitud {
 
     private String tipoDeCuenta;
-    private double saldo;
+    private String saldo;
     private String exentaGMF;
-    private Long clienteId;
+    private String clienteId;
 
-    public CuentaSolicitud(String tipoDeCuenta, double saldo, String exentaGMF, Long clienteId) {
+    public CuentaSolicitud(String tipoDeCuenta, String saldo, String exentaGMF, String clienteId) {
         this.tipoDeCuenta = tipoDeCuenta;
         this.saldo = saldo;
         this.exentaGMF = exentaGMF;
@@ -19,7 +19,7 @@ public class CuentaSolicitud {
         return tipoDeCuenta;
     }
 
-    public double getSaldo() {
+    public String getSaldo() {
         return saldo;
     }
 
@@ -27,7 +27,7 @@ public class CuentaSolicitud {
         return exentaGMF;
     }
 
-    public Long getClienteId() {
+    public String getClienteId() {
         return clienteId;
     }
 
@@ -35,7 +35,7 @@ public class CuentaSolicitud {
         this.tipoDeCuenta = tipoDeCuenta;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(String saldo) {
         this.saldo = saldo;
     }
 
@@ -43,7 +43,7 @@ public class CuentaSolicitud {
         this.exentaGMF = exentaGMF;
     }
 
-    public void setClienteId(Long clienteId) {
+    public void setClienteId(String clienteId) {
         this.clienteId = clienteId;
     }
 

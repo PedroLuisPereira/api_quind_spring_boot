@@ -19,4 +19,22 @@ public class Validacion {
         }
     }
 
+    public static void validarValorNumericoDouble(String valor, String mensaje) {
+
+        try {
+            Double.parseDouble(valor);
+        } catch (NumberFormatException e) {
+            throw new CampoConException(mensaje);
+        }
+    }
+
+    public static void validarValorNumericoLong(String valor, String mensaje) {
+
+        try {
+            Long.parseLong(valor);
+        } catch (NumberFormatException e) {
+            throw new CampoConException(mensaje);
+        }
+    }
+
 }

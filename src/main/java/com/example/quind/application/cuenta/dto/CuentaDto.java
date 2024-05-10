@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 public class CuentaDto {
 
     private String tipoDeCuenta;
-    private double saldo;
+    private String saldo;
     private String exentaGMF;
-    private long clienteId;
+    private String clienteId;
 
 }
 
